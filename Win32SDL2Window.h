@@ -15,6 +15,7 @@ class Win32SDL2Window{
     protected:
         void cleanUpSDL();
         virtual void render(){  }
+        virtual void update(){ }
     protected:
         SDL_Window* window;
         SDL_Surface* screenSurface;

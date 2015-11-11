@@ -8,7 +8,7 @@ protected:
     float timeForFrame;
     float timeInFrame;
     int curFrame;
-    SDL_Rect[] spriteClips;
+    SDL_Rect * spriteClips;
 public:
     AnimatedSprite (std::string name);
     virtual ~AnimatedSprite ();

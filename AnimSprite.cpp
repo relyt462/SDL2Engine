@@ -1,5 +1,5 @@
 #include "AnimSprite.h"
-
+#include "Texture.h"
 AnimatedSprite::AnimatedSprite(std::string name) : Sprite(name)
 {
     spriteClips = NULL;
@@ -31,7 +31,7 @@ void AnimatedSprite::update(float elapsedSeconds)
 }*/
 
 bool AnimatedSprite::generateTexture(std::string fileName, SDL2Renderer* renderer,
-    int spriteHeight, int spriteWidth, int numColumns, int numRows, float timeInFrame)
+    int spriteHeight, int spriteWidth, int numColumns, int numRows, float timeForFrame)
 {
     renderRect->w = spriteWidth;
     renderRect->h = spriteWidth;
