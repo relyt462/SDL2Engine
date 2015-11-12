@@ -62,12 +62,12 @@ bool GameWindow::init(WindowConfig config)
     return success;
 }
 
-void GameWindow::render()
+void GameWindow::render(float interpolation)
 {
-    objectManager->render();
+    objectManager->render(interpolation);
 }
 
 void GameWindow::update()
 {
-    objectManager->update(time++);
+    objectManager->update();
 }

@@ -15,7 +15,7 @@ Sprite::~Sprite()
     delete this->renderRect;
 }
 
-void Sprite::render(SDL2Renderer* renderer)
+void Sprite::render(SDL2Renderer* renderer, float interpolation)
 {
     if(this->texture)
     {
@@ -23,7 +23,7 @@ void Sprite::render(SDL2Renderer* renderer)
     }
 }
 
-void Sprite::update(float elapsedSeconds)
+void Sprite::update()
 {
 
 }

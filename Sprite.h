@@ -12,8 +12,8 @@ class Sprite : public GameObject
     public:
         Sprite(std::string name);
         ~Sprite();
-        virtual void render(SDL2Renderer* renderer);
-        virtual void update(float elapsedSeconds);
+        virtual void render(SDL2Renderer* renderer, float interpolation);
+        virtual void update();
         virtual bool generateTexture(std::string fileName, SDL2Renderer * renderer, SDL_Rect clipRect);
         virtual void setPosition(int x,int y);
     protected:

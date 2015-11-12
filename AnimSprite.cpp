@@ -13,25 +13,17 @@ AnimatedSprite::~AnimatedSprite()
     }
 }
 
-void AnimatedSprite::update(float elapsedSeconds)
+void AnimatedSprite::update()
 {
-    timeInFrame += elapsedSeconds;
-    if(timeInFrame > timeForFrame)
+    if(ticksInFrame > ticksForFrame)
     {
         nextFrame();
     }
+    ticksInFrame++;
 }
 
-/*void AnimatedSprite::render(SDL2Renderer* renderer)
-{
-    if(this->texture)
-    {
-        renderer->renderTexture(texture, renderRect);
-    }
-}*/
-
 bool AnimatedSprite::generateTexture(std::string fileName, SDL2Renderer* renderer,
-    int spriteHeight, int spriteWidth, int numColumns, int numRows, float timeForFrame)
+    int spriteHeight, int spriteWidth, int numColumns, int numRows, int ticksForFrame)
 {
     renderRect->w = spriteWidth;
     renderRect->h = spriteWidth;
@@ -45,7 +37,7 @@ bool AnimatedSprite::generateTexture(std::string fileName, SDL2Renderer* rendere
             spriteClips[frameIndex++] = {j * spriteWidth, i * spriteHeight, spriteWidth, spriteHeight};
         }
     }
-    this->timeForFrame = timeForFrame;
+    this->ticksForFrame = ticksForFrame;
     texture = new Texture();
     return texture->generateTexture(fileName, renderer, SDL_BLENDMODE_BLEND, spriteClips[0]);
 }

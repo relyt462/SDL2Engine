@@ -13,20 +13,20 @@ GameObjectManager::~GameObjectManager()
     }
 }
 
-void GameObjectManager::render()
+void GameObjectManager::render(float interpolation)
 {
     for(auto it = objects.begin(); it != objects.end(); ++it)
     {
         if(it->second->isVisible())
-            it->second->render(renderer);
+            it->second->render(renderer, interpolation);
     }
 }
 
-void GameObjectManager::update(float elapsedSeconds)
+void GameObjectManager::update()
 {
     for(auto it = objects.begin(); it != objects.end(); ++it)
     {
-        it->second->update(elapsedSeconds);
+        it->second->update();
     }
 }
 

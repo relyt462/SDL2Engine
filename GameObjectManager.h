@@ -14,8 +14,8 @@ public:
     GameObjectManager();
     ~GameObjectManager();
     void setRenderer(SDL2Renderer* renderer) {this->renderer = renderer;}
-    void render();
-    void update(float elapsedSeconds);
+    void render(float interpolation);
+    void update();
     GameObject* getObject(std::string objectName);
     void addObject(std::string objectName, GameObject* object);
 protected:

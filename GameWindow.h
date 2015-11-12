@@ -10,7 +10,7 @@ class GameWindow: public Win32SDL2Window{
     public:
         GameWindow();
         ~GameWindow();
-        void render();
+        void render(float interpolation);
         void update();
         bool createStandardObjects();
         bool init(WindowConfig config);

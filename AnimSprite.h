@@ -5,18 +5,17 @@
 class AnimatedSprite : public Sprite {
 protected:
     int numFrames;
-    float timeForFrame;
-    float timeInFrame;
+    int ticksForFrame;
+    int ticksInFrame;
     int curFrame;
     SDL_Rect * spriteClips;
 public:
     AnimatedSprite (std::string name);
     virtual ~AnimatedSprite ();
-    void update(float elapsedSeconds);
-//    void render(SDL2Renderer* renderer);
+    void update();
     bool generateTexture(std::string fileName, SDL2Renderer * renderer,
         int spriteHeight, int spriteWidth, int numColumns, int numRows,
-        float timeForFrame);
+        int timeForFrame);
 protected:
     void nextFrame();
 };

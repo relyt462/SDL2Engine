@@ -10,8 +10,8 @@ class GameObject{
     public:
         GameObject(std::string name):name(name) {};
         virtual ~GameObject() {};
-        virtual void update(float elapsedSeconds){};
-        virtual void render(SDL2Renderer* renderer){};
+        virtual void update(){};
+        virtual void render(SDL2Renderer* renderer, float interpolation){};
         void setVisible() { visible = true; };
         void setNotVisible() { visible = false; };
         bool isVisible() { return visible; };

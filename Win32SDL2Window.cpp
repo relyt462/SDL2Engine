@@ -66,6 +66,10 @@ void Win32SDL2Window::processEvents()
     {
         return;
     }
+
+    short nextGameTick = getNumberOfTicks();
+    int loops;
+    float interpolation;
     bool quit = false;
     SDL_Event event;
     //Game loop
@@ -80,8 +84,19 @@ void Win32SDL2Window::processEvents()
             }
             //Handle other types of events here
         }
+        //Update loop
+        loops = 0;
+        while(getNumberOfTicks() > nextGameTick && loops < MAX_FRAMESKIP)
+        {
+            update();
+
+            nextGameTick += SKIP_TICKS;
+            loops++;
+        }
+        interpolation = (float)(getNumberOfTicks() + SKIP_TICKS - nextGameTick) / (float)(SKIP_TICKS);
+
         renderer->renderBegin();
-        render();
+        render(interpolation);
         renderer->renderEnd();
     }
 }
@@ -95,4 +110,9 @@ void Win32SDL2Window::cleanUpSDL()
     window = NULL;
     IMG_Quit();
     SDL_Quit();
+}
+
+int Win32SDL2Window::getNumberOfTicks()
+{
+    return ((float)SDL_GetTicks() /1000.0f) * (float)TICKS_PER_SECOND;
 }
