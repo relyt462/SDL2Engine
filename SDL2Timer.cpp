@@ -1,14 +1,14 @@
 #include "SDL2Timer.h"
-#include "SDL2.h"
-SDL2Timer(int ticksPerSecond) : ticksPerSecond(ticksPerSecond)
+#include <SDL.h>
+SDL2Timer::SDL2Timer(int ticksPerSecond) : ticksPerSecond(ticksPerSecond)
 {
     running = false;
     paused = false;
     startTime = 0;
     pausedTime = 0;
 }
-~SDL2Timer(){   }
-void start()
+SDL2Timer::~SDL2Timer(){   }
+void SDL2Timer::start()
 {
     if(paused)
     {
@@ -21,7 +21,7 @@ void start()
     }
     running = true;
 }
-void pause()
+void SDL2Timer::pause()
 {
     if(running)
     {
@@ -29,12 +29,12 @@ void pause()
         paused = true;
     }
 }
-int getTicks()
+int SDL2Timer::getTicks()
 {
     unsigned long timeInMs = getMilliseconds();
-    return (int)(((float)timeInMs/1000.0f) * 60.0f); 
+    return (int)(((float)timeInMs/1000.0f) * 60.0f);
 }
-unsigned long getMilliseconds()
+unsigned long SDL2Timer::getMilliseconds()
 {
     unsigned long timePassed = 0;
     if(running)
@@ -50,11 +50,11 @@ unsigned long getMilliseconds()
     }
     return timePassed;
 }
-bool isRunning()
+bool SDL2Timer::isRunning()
 {
     return running;
 }
-bool isPaused()
+bool SDL2Timer::isPaused()
 {
     return paused;
 }

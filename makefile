@@ -3,7 +3,7 @@
 #and may not be redistributed without written permission.
 
 #OBJS specifies which files to compile as part of the project
-OBJS = main.cpp Win32SDL2Window.cpp SDL2Renderer.cpp Texture.cpp Sprite.cpp GameObjectManager.cpp GameWindow.cpp AnimSprite.cpp
+OBJS = main.cpp Win32SDL2Window.cpp SDL2Renderer.cpp Texture.cpp Sprite.cpp GameObjectManager.cpp GameWindow.cpp AnimSprite.cpp SDL2Timer.cpp
 
 #CC specifies which compiler we're using
 CC = g++

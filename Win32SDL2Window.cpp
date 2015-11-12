@@ -2,19 +2,24 @@
 #include <SDL_image.h>
 #include "WindowConfig.h"
 #include "SDL2Renderer.h"
+#include "SDL2Timer.h"
 Win32SDL2Window::Win32SDL2Window(){
     initialized = false;
     window = NULL;
     renderer = NULL;
     screenSurface = NULL;
+    timer = new SDL2Timer(TICKS_PER_SECOND);
 }
 Win32SDL2Window::~Win32SDL2Window(){
     cleanUpSDL();
+    delete timer;
 }
 
 //Initializes the window and displays it
-//last modified : 10-19-15
+//Created : 10-19-15
 //returns true if successful
+//last modified : 11-12-15
+//  Added timer initialization
 bool Win32SDL2Window::init(WindowConfig config)
 {
     windowConfig = config;
@@ -48,6 +53,9 @@ bool Win32SDL2Window::init(WindowConfig config)
                 else
                 {
                     screenSurface = SDL_GetWindowSurface(window);
+
+                    //Everything worked start timer
+                    timer->start();
                 }
             }
             else
@@ -67,7 +75,7 @@ void Win32SDL2Window::processEvents()
         return;
     }
 
-    short nextGameTick = getNumberOfTicks();
+    unsigned long nextGameTick = timer->getTicks();
     int loops;
     float interpolation;
     bool quit = false;
@@ -86,14 +94,14 @@ void Win32SDL2Window::processEvents()
         }
         //Update loop
         loops = 0;
-        while(getNumberOfTicks() > nextGameTick && loops < MAX_FRAMESKIP)
+        while(timer->getTicks() > nextGameTick && loops < MAX_FRAMESKIP)
         {
             update();
 
             nextGameTick += SKIP_TICKS;
             loops++;
         }
-        interpolation = (float)(getNumberOfTicks() + SKIP_TICKS - nextGameTick) / (float)(SKIP_TICKS);
+        interpolation = (float)(timer->getTicks() + SKIP_TICKS - nextGameTick) / (float)(SKIP_TICKS);
 
         renderer->renderBegin();
         render(interpolation);
@@ -110,9 +118,4 @@ void Win32SDL2Window::cleanUpSDL()
     window = NULL;
     IMG_Quit();
     SDL_Quit();
-}
-
-int Win32SDL2Window::getNumberOfTicks()
-{
-    return ((float)SDL_GetTicks() /1000.0f) * (float)TICKS_PER_SECOND;
 }

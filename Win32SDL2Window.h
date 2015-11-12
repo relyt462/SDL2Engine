@@ -5,6 +5,7 @@
 #include "WindowConfig.h"
 
 class SDL2Renderer;
+class SDL2Timer;
 class Win32SDL2Window{
     protected:
         SDL_Window* window;
@@ -12,6 +13,7 @@ class Win32SDL2Window{
         WindowConfig windowConfig;
         SDL2Renderer* renderer;
         bool initialized;
+        SDL2Timer* timer;
     private:
         const int TICKS_PER_SECOND = 60;
         const int SKIP_TICKS = 1000/TICKS_PER_SECOND;
@@ -26,8 +28,6 @@ class Win32SDL2Window{
         void cleanUpSDL();
         virtual void render(float interpolation){  }
         virtual void update(){ }
-    private:
-        int getNumberOfTicks();
 };
 
 #endif
