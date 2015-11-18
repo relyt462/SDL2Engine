@@ -36,7 +36,7 @@ bool GameWindow::createStandardObjects()
 		success = false;
     object = new AnimatedSprite("AnimatedTest");
     ((AnimatedSprite*)object)->setPosition(120, 120);
-    if(((AnimatedSprite*)object)->generateTexture("foo.png", renderer, 205, 64, 4, 1, 1));
+    if(((AnimatedSprite*)object)->generateTexture("foo.png", renderer, 205, 64, 4, 1, 1))
     {
         object->setVisible();
         objectManager->addObject("AnimatedTest", object);

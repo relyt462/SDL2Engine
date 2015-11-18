@@ -50,4 +50,5 @@ void AnimatedSprite::nextFrame()
         curFrame = 0;
     }
     texture->setClip(spriteClips[curFrame]);
+    this->ticksInFrame = 0;
 }
